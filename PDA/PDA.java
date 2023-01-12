@@ -21,6 +21,9 @@ public class PDA
     }
     
     public int getYoungerAge(int age){
+        if (age % 2 != 0) {
+            age += 1;
+        }
         return (age / 2) + 7;
     }
     
@@ -40,15 +43,24 @@ public class PDA
             System.out.println("How old are you?");
             try {
                 age = scanner.nextInt();
-                System.out.println(age);
+                System.out.println("You are "+ age + " years old");
+                if (age < LOWER_BOUND) {
+                    System.out.println(age + " is too young!!");
+                } else {
+                    System.out.println("Computations go here");
+                    System.out.println("lowest dating age is " + getYoungerAge(age));
+                    System.out.println("highest dating age is " + getOlderAge(age));
+                }
             } catch (InputMismatchException error) {
                 scanner.next();
                 System.out.println("please enter an integer");
             }
-            if (age < LOWER_BOUND) {
-                System.out.println(age+" is too young!!");
+            
+            System.out.println("to quit enter 0");
+            if (age == 0) {
+                shouldContinue = false;
             } else {
-                System.out.println("Computations go here");
+                shouldContinue = true;
             }
         }
     }
